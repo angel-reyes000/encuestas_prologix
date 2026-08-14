@@ -16,7 +16,7 @@ interface Preguntas {
     fun: object | any
 }
 
-export default function Preguntas () {
+export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, respuestasEncuesta }: { setGeneraReporte: any, setRespuestasEncuesta: any, respuestasEncuesta: any}) {
     const [respuestaUno, setRespuestaUno] = useState<number>();
     const [respuestaDos, setRespuestaDos] = useState<number>();
     const [respuestaTres, setRespuestaTres] = useState<number>();
@@ -37,6 +37,8 @@ export default function Preguntas () {
     const [respuestaDieciocho, setRespuestaDieciocho] = useState<number>();
     const [respuestaDiecinueve, setRespuestaDiecinueve] = useState<number>();
     const [respuestaVeinte, setRespuestaVeinte] = useState<number>();
+
+    const [estadoEncuesta, setEstadoEncuesta] = useState<any>();
 
     const encuesta = [
         {
@@ -185,7 +187,7 @@ export default function Preguntas () {
     
     const [encuestaTerminada, setEncuestaTerminada] = useState<boolean>(false);
 
-    let contadorRespuestas = 0;
+    let contadorRespuestas = 20;
     useEffect(() => {
 
         AOS.init({
@@ -195,18 +197,24 @@ export default function Preguntas () {
         })
 
         for (let i = 0; i < encuesta.length; i++){
+            console.log("SECCION: ", encuesta[i].seccion)
             for (let j = 0; j < encuesta[i].preguntas.length; j++) {
-                console.log("FOR", encuesta[i].preguntas[j].respuesta)
                 if (encuesta[i].preguntas[j].respuesta !== undefined) {
                     console.log(encuesta[i].preguntas[j].respuesta)
                     contadorRespuestas += 1
                     console.log("Contador respuestas: " + contadorRespuestas)
                 }
+                console.log(encuesta[i].preguntas[j].pregunta)
             }
         }
 
+        setEstadoEncuesta(encuesta)
+        console.log("ESTADO ENCUESTA: ", estadoEncuesta)
+        setRespuestasEncuesta(estadoEncuesta)
+
         if (contadorRespuestas === 20) {
             setEncuestaTerminada(true);
+            setRespuestasEncuesta([...encuesta])
         }
 
         console.log("ACCA: ", encuesta[0].preguntas)
@@ -254,10 +262,14 @@ export default function Preguntas () {
                     </div>
                 ))}
             </div>
-            <div className="flex flex-col items-center text-center p-10 bg-[rgb(0,0,50)] my-20 gap-5">
+            <div className="flex flex-col items-center text-center p-10 bg-linear-to-r from-[rgb(0,0,50)] to-[rgb(0,0,100)] my-20 gap-5">
                 <h3 className="text-[1.5rem] font-semibold text-white" data-aos="zoom-in">Genera un resumen y un promedio de tus resultados, DESCARGABLE EN PDF!</h3>
                 {encuestaTerminada ? '' : <p className="text-red-300" data-aos="zoom-in">Completa todas las preguntas antes de poder generar tu reporte</p>}
-                <button className={"text-center text-[1.5rem] px-10 py-2 font-semibold w-fit rounded-lg whitespace-pre" + (encuestaTerminada ? ' bg-linear-to-r from-orange-300 to-orange-100 cursor-pointer active:scale-95 hover:shadow-[0_8px_30px_-4px_rgb(255,170,50)] ' : ' bg-linear-to-r from-orange-900 to-orange-800 ')} data-aos="zoom-in">{'Generar reporte >'}</button>
+                <button onClick={() => {
+                    if (encuestaTerminada) {
+                        setGeneraReporte(true);
+                        setRespuestasEncuesta(estadoEncuesta)
+                    }}} className={"text-center text-[1.5rem] px-10 py-2 font-semibold w-fit rounded-sm whitespace-pre" + (encuestaTerminada ? ' bg-linear-to-r from-orange-300 to-orange-100 cursor-pointer active:scale-95 hover:shadow-[0_8px_30px_-4px_rgb(255,170,50)] ' : ' bg-linear-to-r from-orange-900 to-orange-800 ')} data-aos="zoom-in">{'Generar reporte >'}</button>
             </div>
             {/* <button onClick={() => {
                 console.log(encuesta)

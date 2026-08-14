@@ -6,6 +6,7 @@ import { FaCircle } from 'react-icons/fa';
 import { useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
+import LogoBar from './logoBar';
 
 const texto_instrucciones = `
 A continuación encontrará una serie de preguntas relacionadas con la operación, sistemas, datos, seguridad e innovación de su empresa.
@@ -33,10 +34,6 @@ export default function Encabezado () {
     return (
         <>
             <div className='flex flex-col justify-items-center items-start h-auto w-full'>
-                <div className='flex flex-cols justify-between items-center w-full gap-5 border-b-2 pb-3'>
-                    <Image src={Logo} width={150} height={150} alt='logo' data-aos="flip-left"/>
-                    <p className='flex flex-cols items-center justify-center text-[0.8rem] text-blue-900 font-semibold gap-2' data-aos="zoom-in"><FaCircle size={5} />La tecnología impulsa el crecimiento, la eficiencia y la toma de decisiones.</p>
-                </div>
                 <div className='flex flex-col justify-center items-center mt-5 p-5 sm:p-10 md:p-15 lg:p-20 bg-black text-white text-center gap-10 max-w-[100%] bg-[url("/images/fondo_titulo.png")] bg-cover bg-center'>
                     <h1 className='text-[2.5rem] lg:text-[3rem] font-bold' data-aos="fade-up">Diagnóstico de Transformación Digital y Automatización</h1>
                     {/*<h2 className='text-[1.2rem] font-semibold'>El objetivo es identificar el nivel actual de madurez tecnológica de la empresa y detectar oportunidades de mejora, automatización, integración de sistemas, analítica de datos e innovación digital, con el fin de priorizar iniciativas de alto impacto para el negocio.</h2>*/}
