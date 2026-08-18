@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Logo from '../../public/images/logo_prologix_bg_void.png';
 import GraficaPie from './graficaPie';
 import { useState, useEffect } from 'react';
+import { FaRedo, FaDownload } from 'react-icons/fa';
+import DescargarPDF from './descargarPDF';
 
 let promedio_seccion_uno = 0
 let promedio_seccion_dos = 0
@@ -23,7 +25,7 @@ let lista_promedios = [
     promedio_seccion_siete,
 ]
 
-export default function Resultados ({ respuestasEncuesta }: { respuestasEncuesta: any }) {
+export default function Resultados ({ respuestasEncuesta, setGeneraReporte }: { respuestasEncuesta: any, setGeneraReporte: any }) {
     const [estadoPromedioTotal, setEstadoPromedioTotal] = useState<number>();
 
     //console.log("Respuestas encuesta:", respuestasEncuesta)
@@ -72,7 +74,7 @@ export default function Resultados ({ respuestasEncuesta }: { respuestasEncuesta
 
     return (
         <>
-            <div className='flex flex-col gap-5'>
+            <div id="contenido" className='flex flex-col gap-5 mb-10'>
                 <div className='flex flex-col md:flex-row justify-center items-center gap-0 md:gap-10 pt-10 md:py-8 px-15 md:px-2 bg-[url("/images/fondo_titulo.png")] bg-cover bg-center'>
                     <div className='flex flex-col justify-center gap-3 w-full md:w-[40%] text-white'>
                         <p className='text-blue-400'>-Analisis de resultados</p>
@@ -97,6 +99,13 @@ export default function Resultados ({ respuestasEncuesta }: { respuestasEncuesta
                             <p className='m-0 p-0'>Brecha crítica que requiere atención prioritaria.</p>
                         </div>
                     ))}
+                </div>
+                <div className='flex justify-around gap-5'>
+                    <DescargarPDF />
+                    <button onClick={() => setGeneraReporte(false)} 
+                        className='flex gap-1 items-center cursor-pointer active:scale-90'>
+                            <FaRedo style={{display: 'inline'}}/>Reiniciar encuesta
+                    </button>
                 </div>
             </div>
         </>

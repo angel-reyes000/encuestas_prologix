@@ -31,7 +31,7 @@ export default function Home() {
         </header>
         <main>
           <section>
-            <Resultados respuestasEncuesta={respuestasEncuesta} />
+            <Resultados respuestasEncuesta={respuestasEncuesta} setGeneraReporte={setGeneraReporte} />
           </section>
         </main>
       </div>
