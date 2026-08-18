@@ -197,19 +197,19 @@ export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, re
         })
 
         for (let i = 0; i < encuesta.length; i++){
-            console.log("SECCION: ", encuesta[i].seccion)
+            //console.log("SECCION: ", encuesta[i].seccion)
             for (let j = 0; j < encuesta[i].preguntas.length; j++) {
                 if (encuesta[i].preguntas[j].respuesta !== undefined) {
-                    console.log(encuesta[i].preguntas[j].respuesta)
+                    //console.log(encuesta[i].preguntas[j].respuesta)
                     contadorRespuestas += 1
-                    console.log("Contador respuestas: " + contadorRespuestas)
+                    //console.log("Contador respuestas: " + contadorRespuestas)
                 }
-                console.log(encuesta[i].preguntas[j].pregunta)
+                //console.log(encuesta[i].preguntas[j].pregunta)
             }
         }
 
         setEstadoEncuesta(encuesta)
-        console.log("ESTADO ENCUESTA: ", estadoEncuesta)
+        //console.log("ESTADO ENCUESTA: ", estadoEncuesta)
         setRespuestasEncuesta(estadoEncuesta)
 
         if (contadorRespuestas === 20) {
@@ -217,7 +217,7 @@ export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, re
             setRespuestasEncuesta([...encuesta])
         }
 
-        console.log("ACCA: ", encuesta[0].preguntas)
+        //console.log("ACCA: ", encuesta[0].preguntas)
     }, [
         respuestaUno,
         respuestaDos,
