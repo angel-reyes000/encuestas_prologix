@@ -15,7 +15,6 @@ export default function Home() {
     {generaReporte === false ? (
       <div className="py-5">
         <header>
-          <LogoBar />
           <Encabezado />
         </header>
         <main>
@@ -26,9 +25,6 @@ export default function Home() {
       </div>
     ) : (
       <div className="py-5">
-        <header>
-          <LogoBar />
-        </header>
         <main>
           <section>
             <Resultados respuestasEncuesta={respuestasEncuesta} setGeneraReporte={setGeneraReporte} />

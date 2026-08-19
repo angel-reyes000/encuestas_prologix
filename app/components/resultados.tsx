@@ -13,17 +13,7 @@ let promedio_seccion_tres = 0
 let promedio_seccion_cuatro = 0
 let promedio_seccion_cinco = 0
 let promedio_seccion_seis = 0
-let promedio_seccion_siete = 0
-
-let lista_promedios = [
-    promedio_seccion_uno,
-    promedio_seccion_dos,
-    promedio_seccion_tres,
-    promedio_seccion_cuatro,
-    promedio_seccion_cinco,
-    promedio_seccion_seis,
-    promedio_seccion_siete,
-]
+let promedio_seccion_siete = 5
 
 export default function Resultados ({ respuestasEncuesta, setGeneraReporte }: { respuestasEncuesta: any, setGeneraReporte: any }) {
     const [estadoPromedioTotal, setEstadoPromedioTotal] = useState<number>();
@@ -67,6 +57,7 @@ export default function Resultados ({ respuestasEncuesta, setGeneraReporte }: { 
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         setEstadoPromedioTotal((promedio_total))
         console.log("PROMEDIO UNO: ", lista_promedios[0])
         //console.log("EstadoPromedioTotal: ", promedio_total)
@@ -93,8 +84,8 @@ export default function Resultados ({ respuestasEncuesta, setGeneraReporte }: { 
                                 <h3>{obj.seccion}</h3>
                                 <p className='text-black'>{(lista_promedios[indice].toFixed(2))}</p>
                             </div>
-                            <div className='bg-gray-400 rounded-3xl h-[8px]'>
-                                <div className='bg-blue-900 rounded-3xl h-full' style={{width: `${Number(lista_promedios[indice]) * 20}%`}}>.</div>
+                            <div className='bg-gray-500 rounded-3xl h-[8px]'>
+                                <div className='bg-gradient-to-r from-blue-900 to-blue-500  rounded-3xl h-full' style={{width: `${Number(lista_promedios[indice]) * 20}%`}}>.</div>
                             </div>
                             <p className='m-0 p-0'>Brecha crítica que requiere atención prioritaria.</p>
                         </div>
