@@ -241,6 +241,8 @@ export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, re
         respuestaVeinte,
     ])
 
+    useEffect(() => window.scrollTo(0, 0), [])
+
     return (
         <>
             <div className="flex flex-col my-15 gap-15">
@@ -271,9 +273,9 @@ export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, re
                         setRespuestasEncuesta(estadoEncuesta)
                     }}} className={"text-center text-[1.5rem] px-10 py-2 font-semibold w-fit rounded-sm whitespace-pre" + (encuestaTerminada ? ' bg-linear-to-r from-orange-300 to-orange-100 cursor-pointer active:scale-95 hover:shadow-[0_8px_30px_-4px_rgb(255,170,50)] ' : ' bg-linear-to-r from-orange-900 to-orange-800 ')} data-aos="zoom-in">{'Generar reporte >'}</button>
             </div>
-            {/* <button onClick={() => {
-                console.log(encuesta)
-            }}>CLICKKKKKKKKKK</button> */}
+            <div>
+                
+            </div>
         </>
     )
 }

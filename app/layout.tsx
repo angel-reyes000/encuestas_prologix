@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import LogoBar from "./components/logoBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html className="h-full w-full" lang="en">
-      <body className="h-full w-full py-6 md:py-8 lg:py-10 px-5 sm:px-10 md:px-20 lg:px-40">{children}</body>
+      <body className="h-full w-full py-6 md:py-8 lg:py-10 px-5 sm:px-10 md:px-20 lg:px-40">
+        <header>
+          <LogoBar />
+        </header>
+        {children}
+      </body>
     </html>
   );
 }
