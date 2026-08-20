@@ -18,9 +18,15 @@ export default function LogoBar () {
     }, [])
 
     return (
-            <div className='flex flex-cols justify-between items-center w-full gap-5 border-b-2 pb-3'>
-                <Image src={Logo} width={150} height={150} alt='logo' data-aos="flip-left"/>
-                <p className='flex flex-cols items-center justify-center text-[0.8rem] text-blue-900 font-semibold gap-2' data-aos="zoom-in"><FaCircle size={5} />La tecnología impulsa el crecimiento, la eficiencia y la toma de decisiones.</p>
+            <div className='flex flex-row flex-wrap justify-between items-center w-full gap-4 sm:gap-5 pb-4 border-b border-slate-200'>
+                <Image src={Logo} width={150} height={150} alt='logo' className='w-[110px] sm:w-[130px] md:w-[150px] h-auto' data-aos="flip-left"/>
+                <p
+                    className='flex flex-row items-center justify-center text-[0.8rem] sm:text-[0.85rem] text-[rgb(0,0,90)] font-semibold gap-2'
+                    data-aos="zoom-in"
+                >
+                    <FaCircle size={5} className='text-blue-400 shrink-0' />
+                    La tecnología impulsa el crecimiento, la eficiencia y la toma de decisiones.
+                </p>
             </div>
     )
 }
