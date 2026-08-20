@@ -243,38 +243,130 @@ export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, re
 
     useEffect(() => window.scrollTo(0, 0), [])
 
+    // Valor puramente visual para la barra de progreso: se calcula a partir
+    // del mismo arreglo "encuesta" que ya se usa para renderizar, sin tocar
+    // ningún estado ni handler existente.
+    const totalPreguntas = 20;
+    let totalContestadas = 0;
+    for (let i = 0; i < encuesta.length; i++) {
+        for (let j = 0; j < encuesta[i].preguntas.length; j++) {
+            if (encuesta[i].preguntas[j].respuesta !== undefined) {
+                totalContestadas += 1;
+            }
+        }
+    }
+    const porcentajeProgreso = Math.round((totalContestadas / totalPreguntas) * 100);
+
+    const etiquetasEscala = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
+
     return (
         <>
-            <div className="flex flex-col my-15 gap-15">
-                {encuesta.map((secciones: Encuesta) => (
-                    <div key={secciones.id} className="flex flex-col gap-5" data-aos="fade-up">
-                        <h1 className="p-5 bg-linear-to-b from-[rgb(0,0,50)] to-[rgb(0,0,110)] text-white text-[1.7rem] font-semibold">{secciones.seccion}</h1>
-                        {secciones.preguntas.map((preguntas: Preguntas) => (
-                           <div className="flex flex-col gap-5 pl-3">
-                            <h2 className="text-[1.2rem] font-semibold">{preguntas.pregunta}</h2>
-                            <div className="flex flex-row gap-5">
-                                <p onClick={() => preguntas.fun(1)} className={"py-2 px-4 text-[1.1rem] rounded-3xl border-1 border-black active:scale-90 cursor-pointer" + (preguntas.respuesta === 1 ? ' bg-black text-white ' : '')}>1</p>
-                                <p onClick={() => preguntas.fun(2)} className={"py-2 px-4 text-[1.1rem] rounded-3xl border-1 border-black active:scale-90 cursor-pointer" + (preguntas.respuesta === 2 ? ' bg-black text-white ' : '')}>2</p>
-                                <p onClick={() => preguntas.fun(3)} className={"py-2 px-4 text-[1.1rem] rounded-3xl border-1 border-black active:scale-90 cursor-pointer" + (preguntas.respuesta === 3 ? ' bg-black text-white ' : '')}>3</p>
-                                <p onClick={() => preguntas.fun(4)} className={"py-2 px-4 text-[1.1rem] rounded-3xl border-1 border-black active:scale-90 cursor-pointer" + (preguntas.respuesta === 4 ? ' bg-black text-white ' : '')}>4</p>
-                                <p onClick={() => preguntas.fun(5)} className={"py-2 px-4 text-[1.1rem] rounded-3xl border-1 border-black active:scale-90 cursor-pointer" + (preguntas.respuesta === 5 ? ' bg-black text-white ' : '')}>5</p>
-                            </div>
-                        </div>  
-                        ))}                        
+            {/* Barra de progreso sticky, solo visual */}
+            <div className="sticky top-0 z-20 -mx-5 sm:-mx-10 md:-mx-16 lg:-mx-10 mb-10 bg-slate-50/90 backdrop-blur-sm px-5 sm:px-10 md:px-16 lg:px-10 pt-4 pb-3 border-b border-slate-200">
+                <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold text-[rgb(0,0,90)]">
+                        Diagnóstico de Transformación Digital
+                    </span>
+                    <span className="text-sm font-semibold text-slate-500 tabular-nums">
+                        {totalContestadas}/{totalPreguntas} respondidas
+                    </span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
+                    <div
+                        className="h-full rounded-full bg-linear-to-r from-[rgb(0,0,80)] to-[rgb(0,90,200)] transition-all duration-500 ease-out"
+                        style={{ width: `${porcentajeProgreso}%` }}
+                    />
+                </div>
+            </div>
+
+            <div className="flex flex-col gap-10 md:gap-12">
+                {encuesta.map((secciones: Encuesta, indiceSeccion: number) => (
+                    <div
+                        key={secciones.id}
+                        className="flex flex-col rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+                        data-aos="fade-up"
+                    >
+                        <div className="flex items-center gap-4 px-5 sm:px-8 py-5 bg-linear-to-r from-[rgb(0,0,45)] via-[rgb(0,0,80)] to-[rgb(0,0,110)]">
+                            <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white/15 text-white font-bold text-sm">
+                                {String(indiceSeccion + 1).padStart(2, '0')}
+                            </span>
+                            <h1 className="text-white text-[1.35rem] sm:text-[1.6rem] font-semibold leading-tight">
+                                {secciones.seccion}
+                            </h1>
+                        </div>
+
+                        <div className="flex flex-col divide-y divide-slate-100">
+                            {secciones.preguntas.map((preguntas: Preguntas, indicePregunta: number) => (
+                                <div
+                                    key={indicePregunta}
+                                    className="flex flex-col gap-4 px-5 sm:px-8 py-6"
+                                >
+                                    <h2 className="text-[1.05rem] sm:text-[1.15rem] font-semibold text-slate-800 leading-snug">
+                                        {preguntas.pregunta}
+                                    </h2>
+                                    <div className="flex flex-col gap-2">
+                                        <div className="flex flex-wrap gap-3 sm:gap-4">
+                                            {[1, 2, 3, 4, 5].map((valor) => (
+                                                <button
+                                                    key={valor}
+                                                    type="button"
+                                                    onClick={() => preguntas.fun(valor)}
+                                                    aria-pressed={preguntas.respuesta === valor}
+                                                    aria-label={`Calificación ${valor} de 5: ${etiquetasEscala[valor - 1]}`}
+                                                    className={
+                                                        "flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-full border-2 text-[1.05rem] font-semibold cursor-pointer transition-all duration-200 ease-out active:scale-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-200 " +
+                                                        (preguntas.respuesta === valor
+                                                            ? "border-transparent bg-linear-to-br from-[rgb(0,0,70)] to-[rgb(0,60,160)] text-white shadow-md shadow-blue-900/20 scale-105"
+                                                            : "border-slate-300 text-slate-500 hover:border-[rgb(0,0,90)] hover:text-[rgb(0,0,90)] hover:bg-slate-50")
+                                                    }
+                                                >
+                                                    {valor}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <div className="flex justify-between text-xs text-slate-400 px-1 max-w-[220px] sm:max-w-[260px]">
+                                            <span>Muy bajo</span>
+                                            <span>Muy alto</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 ))}
             </div>
-            <div className="flex flex-col items-center text-center p-10 bg-linear-to-r from-[rgb(0,0,50)] to-[rgb(0,0,100)] my-20 gap-5">
-                <h3 className="text-[1.5rem] font-semibold text-white" data-aos="zoom-in">Genera un resumen y un promedio de tus resultados, DESCARGABLE EN PDF!</h3>
-                {encuestaTerminada ? '' : <p className="text-red-300" data-aos="zoom-in">Completa todas las preguntas antes de poder generar tu reporte</p>}
-                <button onClick={() => {
-                    if (encuestaTerminada) {
-                        setGeneraReporte(true);
-                        setRespuestasEncuesta(estadoEncuesta)
-                    }}} className={"text-center text-[1.5rem] px-10 py-2 font-semibold w-fit rounded-sm whitespace-pre" + (encuestaTerminada ? ' bg-linear-to-r from-orange-300 to-orange-100 cursor-pointer active:scale-95 hover:shadow-[0_8px_30px_-4px_rgb(255,170,50)] ' : ' bg-linear-to-r from-orange-900 to-orange-800 ')} data-aos="zoom-in">{'Generar reporte >'}</button>
-            </div>
-            <div>
-                
+
+            <div
+                className="flex flex-col items-center text-center p-8 sm:p-10 rounded-2xl bg-linear-to-r from-[rgb(0,0,50)] via-[rgb(0,0,80)] to-[rgb(0,0,100)] my-16 gap-5 shadow-lg"
+                data-aos="zoom-in"
+            >
+                <h3 className="text-[1.3rem] sm:text-[1.5rem] font-semibold text-white max-w-xl">
+                    Genera un resumen y un promedio de tus resultados, descargable en PDF
+                </h3>
+                {encuestaTerminada ? (
+                    <p className="text-blue-200 text-sm">Todo listo. Tu reporte está a un clic.</p>
+                ) : (
+                    <p className="text-orange-200 text-sm">
+                        Completa todas las preguntas antes de poder generar tu reporte
+                    </p>
+                )}
+                <button
+                    onClick={() => {
+                        if (encuestaTerminada) {
+                            setGeneraReporte(true);
+                            setRespuestasEncuesta(estadoEncuesta)
+                        }}}
+                    className={
+                        "text-center text-[1.15rem] sm:text-[1.4rem] px-8 sm:px-10 py-3 font-semibold w-fit rounded-full whitespace-pre transition-all duration-200 ease-out " +
+                        (encuestaTerminada
+                            ? " bg-linear-to-r from-orange-300 to-orange-500 text-[rgb(0,0,60)] cursor-pointer active:scale-95 hover:shadow-[0_8px_30px_-4px_rgb(255,170,50)] hover:-translate-y-0.5 "
+                            : " bg-white/10 text-white/50 cursor-not-allowed ")
+                    }
+                    data-aos="zoom-in"
+                    disabled={!encuestaTerminada}
+                >
+                    {'Generar reporte >'}
+                </button>
             </div>
         </>
     )
