@@ -40,7 +40,7 @@ export default function DescargarPDF() {
   return (
     <>
         <button onClick={descargarPDF} 
-            className='flex gap-1 items-center cursor-pointer active:scale-90'>
+            className='flex gap-2 items-center cursor-pointer text-white font-semibold px-6 py-2.5 rounded-full bg-linear-to-r from-[rgb(0,0,70)] to-[rgb(0,60,160)] shadow-md shadow-blue-900/20 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-90 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-200'>
                 <FaDownload style={{display: 'inline'}} />Descargar PDF
         </button>
     </>

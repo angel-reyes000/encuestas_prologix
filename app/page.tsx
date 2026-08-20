@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
     {generaReporte === false ? (
-      <div className="py-5">
+      <div className="py-5 animate-[fadeIn_0.4s_ease-out]">
         <header>
           <Encabezado />
         </header>
@@ -24,7 +24,7 @@ export default function Home() {
         </main>
       </div>
     ) : (
-      <div className="py-5">
+      <div className="py-5 animate-[fadeIn_0.4s_ease-out]">
         <main>
           <section>
             <Resultados respuestasEncuesta={respuestasEncuesta} setGeneraReporte={setGeneraReporte} />

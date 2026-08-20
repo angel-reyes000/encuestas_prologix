@@ -8,20 +8,20 @@ function ProgresoCircular({ promedioTotal }: { promedioTotal: any }) {
     series: [
       {
         type: "pie",
-        radius: ["80%", "90%"],
+        radius: ["78%", "92%"],
         silent: true,
 
         data: [
           {
             value: progreso,
             itemStyle: {
-              color: "#00ccff", // color del progreso
+              color: "#38bdf8", // acento azul claro, más contraste sobre el fondo navy
             },
           },
           {
             value: 100 - progreso,
             itemStyle: {
-              color: "#020202", // color de lo que falta
+              color: "rgba(255,255,255,0.12)", // resto del anillo, translúcido sobre el fondo
             },
           },
         ],
@@ -39,7 +39,7 @@ function ProgresoCircular({ promedioTotal }: { promedioTotal: any }) {
             },
             descripcion: {
               fontSize: 14,
-              color: "#6B7280",
+              color: "#cbd5e1",
               lineHeight: 20,
             },
           },
@@ -50,6 +50,10 @@ function ProgresoCircular({ promedioTotal }: { promedioTotal: any }) {
 
         labelLine: {
           show: false,
+        },
+
+        emphasis: {
+          disabled: true,
         },
       },
     ],

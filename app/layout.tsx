@@ -20,12 +20,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html className="h-full w-full" lang="en">
-      <body className="h-full w-full py-6 md:py-8 lg:py-10 px-5 sm:px-10 md:px-20 lg:px-40">
-        <header>
-          <LogoBar />
-        </header>
-        {children}
+    <html className="h-full w-full scroll-smooth" lang="en">
+      <body
+        className={
+          geistSans.variable +
+          " " +
+          geistMono.variable +
+          " h-full w-full min-h-screen bg-slate-50 antialiased selection:bg-blue-200 selection:text-slate-900"
+        }
+      >
+        <div className="mx-auto max-w-6xl py-6 md:py-8 lg:py-10 px-5 sm:px-10 md:px-16 lg:px-10">
+          <header className="mb-2">
+            <LogoBar />
+          </header>
+          {children}
+        </div>
       </body>
     </html>
   );
