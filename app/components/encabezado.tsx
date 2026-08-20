@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Logo from '../../public/images/logo_prologix_bg_void.png';
-import { FaCircle } from 'react-icons/fa';
+import { FaCircle, FaInfoCircle } from 'react-icons/fa';
 import { useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
@@ -33,14 +33,35 @@ export default function Encabezado () {
 
     return (
         <>
-            <div className='flex flex-col justify-items-center items-start h-auto w-full'>
-                <div className='flex flex-col justify-center items-center mt-5 p-5 sm:p-10 md:p-15 lg:p-20 bg-black text-white text-center gap-10 max-w-[100%] bg-[url("/images/fondo_titulo.png")] bg-cover bg-center'>
-                    <h1 className='text-[2.5rem] lg:text-[3rem] font-bold' data-aos="fade-up">Diagnóstico de Transformación Digital y Automatización</h1>
-                    {/*<h2 className='text-[1.2rem] font-semibold'>El objetivo es identificar el nivel actual de madurez tecnológica de la empresa y detectar oportunidades de mejora, automatización, integración de sistemas, analítica de datos e innovación digital, con el fin de priorizar iniciativas de alto impacto para el negocio.</h2>*/}
-                    <h3 className='text-[1rem] font-semibold' data-aos="fade-up">Esta encuesta permite evaluar de forma rápida y estructurada áreas clave de la operación empresarial, incluyendo procesos, sistemas, datos, atención al cliente, seguridad e innovación. Las respuestas ayudarán a generar un diagnóstico ejecutivo con fortalezas, oportunidades de mejora, riesgos prioritarios y posibles iniciativas tecnológicas para los próximos 6 a 12 meses.</h3>                    
+            <div className='flex flex-col justify-items-center items-start h-auto w-full gap-8 mb-10'>
+                <div className='relative flex flex-col justify-center items-center mt-5 p-8 sm:p-14 md:p-16 lg:p-20 text-white text-center gap-6 w-full rounded-2xl overflow-hidden shadow-lg bg-[url("/images/fondo_titulo.png")] bg-cover bg-center'>
+                    <div className='absolute inset-0 bg-linear-to-b from-[rgb(0,0,40)]/90 via-[rgb(0,0,70)]/85 to-[rgb(0,0,100)]/90' />
+                    <div className='relative flex flex-col items-center gap-6 max-w-3xl'>
+                        <span
+                            className='inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-xs sm:text-sm font-semibold tracking-wide uppercase text-blue-200'
+                            data-aos="fade-up"
+                        >
+                            Diagnóstico ejecutivo · 20 preguntas
+                        </span>
+                        <h1 className='text-[2rem] sm:text-[2.5rem] lg:text-[3rem] font-bold leading-tight' data-aos="fade-up">
+                            Diagnóstico de Transformación Digital y Automatización
+                        </h1>
+                        <h3 className='text-[0.95rem] sm:text-[1.05rem] font-medium text-white/85 leading-relaxed' data-aos="fade-up">
+                            Esta encuesta permite evaluar de forma rápida y estructurada áreas clave de la operación empresarial, incluyendo procesos, sistemas, datos, atención al cliente, seguridad e innovación. Las respuestas ayudarán a generar un diagnóstico ejecutivo con fortalezas, oportunidades de mejora, riesgos prioritarios y posibles iniciativas tecnológicas para los próximos 6 a 12 meses.
+                        </h3>
+                    </div>
                 </div>
-                <div className='whitespace-pre-wrap text-[1rem] text-center font-semibold' data-aos="zoom-in">
-                    {texto_instrucciones}
+
+                <div
+                    className='flex flex-col sm:flex-row gap-4 sm:gap-6 items-start w-full rounded-2xl border border-slate-200 bg-white shadow-sm px-6 sm:px-8 py-6'
+                    data-aos="zoom-in"
+                >
+                    <div className='flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-blue-50 text-[rgb(0,0,90)]'>
+                        <FaInfoCircle size={18} />
+                    </div>
+                    <div className='whitespace-pre-wrap text-[0.95rem] text-left font-medium text-slate-600 leading-relaxed'>
+                        {texto_instrucciones}
+                    </div>
                 </div>
             </div>
         </>
