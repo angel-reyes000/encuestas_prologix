@@ -51,7 +51,7 @@ export default function Resultados ({ respuestasEncuesta, setGeneraReporte }: { 
             console.log("VALORES: ", valor)    
         }
         // console.log("ANTES DE DIVISION", lista_promedios[i])
-        lista_promedios[i] = (lista_promedios[i] / 3)
+        lista_promedios[i] = i !== 6 ? (lista_promedios[i] / 3) : ((lista_promedios[i] + 5) / 3) 
         console.log("Numero de prom: ", lista_promedios[i])
         // console.log("DIVISION", lista_promedios[i])  
     }
