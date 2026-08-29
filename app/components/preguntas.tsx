@@ -187,7 +187,7 @@ export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, re
     
     const [encuestaTerminada, setEncuestaTerminada] = useState<boolean>(false);
 
-    let contadorRespuestas = 20;
+    let contadorRespuestas = 0;
     useEffect(() => {
 
         AOS.init({
@@ -261,7 +261,7 @@ export default function Preguntas ({ setGeneraReporte, setRespuestasEncuesta, re
 
     return (
         <>
-            {/* Barra de progreso sticky, solo visual */}
+            {/* Barra de progreso sticky */}
             <div className="sticky top-0 z-20 -mx-5 sm:-mx-10 md:-mx-16 lg:-mx-10 mb-10 bg-slate-50/90 backdrop-blur-sm px-5 sm:px-10 md:px-16 lg:px-10 pt-4 pb-3 border-b border-slate-200">
                 <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-semibold text-[rgb(0,0,90)]">

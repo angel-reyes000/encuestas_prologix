@@ -56,6 +56,32 @@ export default function Resultados ({ respuestasEncuesta, setGeneraReporte }: { 
         // console.log("DIVISION", lista_promedios[i])  
     }
 
+    // --- NUEVO: porcentaje general (sobre lista_promedios, no altera el cálculo existente) ---
+    const promedioGeneral = lista_promedios.reduce((acc, val) => acc + Number(val), 0) / lista_promedios.length
+    const porcentajeGeneral = (promedioGeneral / 5) * 100
+
+    const analisisPorPorcentaje = (porcentaje: number) => {
+        if (porcentaje >= 67) {
+            return {
+                titulo: 'Estás muy bien encaminado',
+                descripcion: 'Tu gestión financiera muestra una base sólida. Mantén el orden actual y sigue fortaleciendo los procesos que ya tienes funcionando.'
+            }
+        } else if (porcentaje >= 34) {
+            return {
+                titulo: 'Necesitas dirección financiera estratégica',
+                descripcion: 'Hay esfuerzo y buena voluntad, pero falta una visión integral que conecte la información financiera con la toma de decisiones. Sin un líder financiero senior, las inversiones, decisiones de precio, expansión y financiamiento se toman por intuición y no por análisis.'
+            }
+        } else {
+            return {
+                titulo: 'Estás en una zona crítica',
+                descripcion: 'Tu operación presenta brechas financieras importantes que requieren atención inmediata. Te recomendamos ponerte en contacto con un especialista lo antes posible.'
+            }
+        }
+    }
+
+    const analisisResultado = analisisPorPorcentaje(porcentajeGeneral)
+    // --- FIN NUEVO ---
+
     useEffect(() => {
         window.scrollTo(0, 0)
         setEstadoPromedioTotal((promedio_total))
@@ -82,8 +108,8 @@ export default function Resultados ({ respuestasEncuesta, setGeneraReporte }: { 
                 <div className='flex flex-col md:flex-row justify-center items-center gap-6 md:gap-10 pt-10 md:py-12 px-8 sm:px-15 md:px-10 rounded-2xl bg-[url("/images/fondo_titulo.png")] bg-cover bg-center shadow-lg overflow-hidden'>
                     <div className='flex flex-col justify-center gap-3 w-full md:w-[45%] text-white'>
                         <p className='text-blue-300 font-semibold tracking-wide uppercase text-sm'>— Análisis de resultados</p>
-                        <h2 className='text-[2rem] sm:text-[2.5rem] font-bold leading-tight'>Necesitas dirección financiera estratégica</h2>
-                        <p className='font-medium text-white/85 leading-relaxed'>Hay esfuerzo y buena voluntad, pero falta una visión integral que conecte la información financiera con la toma de decisiones. Sin un líder financiero senior, las inversiones, decisiones de precio, expansión y financiamiento se toman por intuición y no por análisis.</p>
+                        <h2 className='text-[2rem] sm:text-[2.5rem] font-bold leading-tight'>{analisisResultado.titulo}</h2>
+                        <p className='font-medium text-white/85 leading-relaxed'>{analisisResultado.descripcion}</p>
                     </div>
                     <div className='flex justify-center items-center w-full md:w-[40%]'>
                         <GraficaPie promedioTotal={estadoPromedioTotal} />

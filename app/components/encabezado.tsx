@@ -1,12 +1,9 @@
 "use client"
 
-import Image from 'next/image';
-import Logo from '../../public/images/logo_prologix_bg_void.png';
-import { FaCircle, FaInfoCircle } from 'react-icons/fa';
+import { FaInfoCircle } from 'react-icons/fa';
 import { useEffect } from 'react';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import LogoBar from './logoBar';
 
 const texto_instrucciones = `
 A continuación encontrará una serie de preguntas relacionadas con la operación, sistemas, datos, seguridad e innovación de su empresa.
@@ -33,8 +30,8 @@ export default function Encabezado () {
 
     return (
         <>
-            <div className='flex flex-col justify-items-center items-start h-auto w-full gap-8 mb-10'>
-                <div className='relative flex flex-col justify-center items-center mt-5 p-8 sm:p-14 md:p-16 lg:p-20 text-white text-center gap-6 w-full rounded-2xl overflow-hidden shadow-lg bg-[url("/images/fondo_titulo.png")] bg-cover bg-center'>
+            <div className='flex flex-col justify-items-center items-start h-auto w-full gap-4 mb-10'>
+                <div className='relative flex flex-col justify-center items-center p-8 sm:p-14 md:p-16 lg:p-20 text-white text-center gap-6 w-full rounded-2xl overflow-hidden shadow-lg bg-[url("/images/fondo_titulo.png")] bg-cover bg-center'>
                     <div className='absolute inset-0 bg-linear-to-b from-[rgb(0,0,40)]/90 via-[rgb(0,0,70)]/85 to-[rgb(0,0,100)]/90' />
                     <div className='relative flex flex-col items-center gap-6 max-w-3xl'>
                         <span
