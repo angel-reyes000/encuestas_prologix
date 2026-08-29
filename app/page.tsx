@@ -1,10 +1,10 @@
 "use client"
 
-import LogoBar from "./components/logoBar";
 import Encabezado from "./components/encabezado";
 import Preguntas from "./components/preguntas";
 import Resultados from "./components/resultados";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Footer from "./components/footer";
 
 export default function Home() {
   const [generaReporte, setGeneraReporte] = useState<any>(false);
@@ -22,6 +22,9 @@ export default function Home() {
             <Preguntas setGeneraReporte={setGeneraReporte} setRespuestasEncuesta={setRespuestasEncuesta} respuestasEncuesta={respuestasEncuesta} />            
           </section>
         </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     ) : (
       <div className="py-5 animate-[fadeIn_0.4s_ease-out]">
@@ -30,6 +33,9 @@ export default function Home() {
             <Resultados respuestasEncuesta={respuestasEncuesta} setGeneraReporte={setGeneraReporte} />
           </section>
         </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     )}
       

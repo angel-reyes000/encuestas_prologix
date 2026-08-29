@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-import Logo from '../../public/images/logo_prologix_bg_void.png';
+import Logo from '../../public/images/logo_grande.png';
 import { FaCircle } from 'react-icons/fa';
 import { useEffect } from 'react';
 import 'aos/dist/aos.css';
